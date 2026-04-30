@@ -1,0 +1,360 @@
+/* Wordly Dictionary - Style.css (Black Modern Theme) */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-image: 
+        radial-gradient(ellipse at top, #1a1a2e 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, #16213e 0%, transparent 50%);
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid #2a2a2a;
+    border-radius: 24px;
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+/* Header */
+header {
+    background: linear-gradient(180deg, #151515 0%, #1a1a1a 100%);
+    color: #fff;
+    padding: 30px;
+    text-align: center;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+header h1 span {
+    background: linear-gradient(135deg, #00d4ff 0%, #7b2cbf 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+header p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Main Content */
+main {
+    padding: 30px;
+}
+
+/* Floating Search Bar */
+.search-box {
+    display: flex;
+    gap: 12px;
+    background: #0f0f0f;
+    padding: 8px;
+    border-radius: 16px;
+    border: 1px solid #252525;
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.3),
+        0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-box:focus-within {
+    border-color: #00d4ff;
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.3),
+        0 4px 20px rgba(0, 212, 255, 0.15);
+}
+
+#search-input {
+    flex: 1;
+    padding: 16px 20px;
+    font-size: 1rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+}
+
+#search-input::placeholder {
+    color: #555;
+}
+
+#search-btn {
+    padding: 16px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    color: #000;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+}
+
+#search-btn:active {
+    transform: translateY(0);
+}
+
+/* Results Container */
+#results-container {
+    min-height: 100px;
+    margin-top: 24px;
+}
+
+/* Word Card */
+.word-card {
+    background: #121212;
+    border: 1px solid #1e1e1e;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.word-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #1e1e1e;
+}
+
+.word-title {
+    font-size: 2rem;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.phonetic {
+    font-size: 0.95rem;
+    color: #00d4ff;
+    font-weight: 500;
+    background: rgba(0, 212, 255, 0.1);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+/* Meanings Section */
+.meanings {
+    margin-top: 20px;
+}
+
+.meaning-block {
+    margin-bottom: 24px;
+}
+
+.meaning-block:last-child {
+    margin-bottom: 0;
+}
+
+.part-of-speech {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #00d4ff;
+    background: rgba(0, 212, 255, 0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.definition-list {
+    list-style: none;
+    margin-top: 16px;
+}
+
+.definition-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.definition-item:last-child {
+    border-bottom: none;
+}
+
+.definition-text {
+    font-size: 0.95rem;
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.example {
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 8px;
+    padding-left: 14px;
+    border-left: 2px solid #00d4ff;
+}
+
+/* Synonyms */
+.synonyms-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #1e1e1e;
+}
+
+.synonyms-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.synonyms-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.synonym-tag {
+    font-size: 0.8rem;
+    padding: 6px 14px;
+    background: rgba(123, 44, 191, 0.2);
+    color: #b388ff;
+    border-radius: 20px;
+    border: 1px solid rgba(123, 44, 191, 0.3);
+}
+
+/* Error Message */
+.error-message {
+    background: rgba(255, 82, 82, 0.05);
+    border: 1px solid rgba(255, 82, 82, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+}
+
+.error-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.error-text {
+    font-size: 1.1rem;
+    color: #ff5252;
+    font-weight: 600;
+}
+
+.error-subtext {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 8px;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #444;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.empty-text {
+    font-size: 0.95rem;
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #1e1e1e;
+    border-top: 3px solid #00d4ff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 16px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .container {
+        border-radius: 20px;
+        margin: 10px;
+    }
+
+    header {
+        padding: 24px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    .search-box {
+        flex-direction: column;
+        padding: 12px;
+    }
+
+    #search-btn {
+        width: 100%;
+    }
+
+    .word-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .word-title {
+        font-size: 1.6rem;
+    }
+}
