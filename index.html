@@ -1,37 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordly Dictionary</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>📖 <span>Wordly</span> Dictionary</h1>
-            <p>Search for any word to see its definition, pronunciation, and more!</p>
-        </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wordly — Interactive Dictionary</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Background particle canvas -->
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
-        <main>
-            <form id="search-form">
-                <div class="search-box">
-                    <input 
-                        type="text" 
-                        id="search-input" 
-                        placeholder="Enter a word to search..."
-                        autocomplete="off"
-                    >
-                    <button type="submit" id="search-btn">Search</button>
-                </div>
-            </form>
+    <!-- Header -->
+    <header class="site-header">
+      <div class="logo" aria-label="Wordly Dictionary">
+        <span class="logo-w">W</span>ordly
+      </div>
+      <p class="tagline">Language, Defined.</p>
+    </header>
 
-            <div id="results-container">
-                <!-- Results will be displayed here -->
-            </div>
-        </main>
-    </div>
+    <!-- Main search section -->
+    <main id="main-content">
+      <section class="search-section" aria-label="Word search">
+        <form
+          id="search-form"
+          class="search-form"
+          role="search"
+          aria-label="Search for a word"
+        >
+          <div class="search-bar-wrapper">
+            <label for="search-input" class="sr-only">Enter a word to look up</label>
+            <input
+              type="text"
+              id="search-input"
+              class="search-input"
+              placeholder="Search a word…"
+              autocomplete="off"
+              autocorrect="off"
+              spellcheck="false"
+              aria-required="true"
+              aria-describedby="search-hint"
+            />
+            <button
+              type="submit"
+              class="search-btn"
+              aria-label="Search"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
+          </div>
+          <p id="search-hint" class="search-hint">
+            Try <button type="button" class="hint-word" data-word="serendipity">serendipity</button>,
+            <button type="button" class="hint-word" data-word="ephemeral">ephemeral</button>, or
+            <button type="button" class="hint-word" data-word="eloquent">eloquent</button>
+          </p>
+        </form>
+      </section>
+
+      <!-- Error message area -->
+      <div
+        id="error-message"
+        class="error-message hidden"
+        role="alert"
+        aria-live="assertive"
+      ></div>
+
+      <!-- Loading spinner -->
+      <div
+        id="loading-state"
+        class="loading-state hidden"
+        aria-live="polite"
+        aria-label="Loading definition"
+      >
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Searching the lexicon…</p>
+      </div>
+
+      <!-- Results section -->
+      <section
+        id="results-section"
+        class="results-section hidden"
+        aria-label="Word definition results"
+        aria-live="polite"
+      >
+        <!-- Word heading + phonetic + audio -->
+        <div class="word-header">
+          <div class="word-meta">
+            <h1 id="result-word" class="result-word"></h1>
+            <span id="result-phonetic" class="result-phonetic"></span>
+          </div>
+          <button
+            id="audio-btn"
+            class="audio-btn hidden"
+            aria-label="Play pronunciation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+            </svg>
+            <span>Listen</span>
+          </button>
+        </div>
+
+        <!-- Meanings container -->
+        <div id="meanings-container" class="meanings-container"></div>
+
+        <!-- Synonyms section -->
+        <div id="synonyms-section" class="synonyms-section hidden">
+          <h2 class="section-label">Synonyms</h2>
+          <div id="synonyms-list" class="synonyms-list"></div>
+        </div>
+
+        <!-- Source section -->
+        <div id="source-section" class="source-section hidden">
+          <span class="source-label">Source:</span>
+          <a
+            id="source-link"
+            class="source-link"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          ></a>
+        </div>
+      </section>
+
+      <!-- Empty state shown on first load -->
+      <div id="empty-state" class="empty-state" aria-hidden="true">
+        <div class="empty-icon">✦</div>
+        <p>Search a word to discover its meaning, pronunciation, and more.</p>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>
+        Created by <span class="footer-author">Weignstone Churchill</span> &bull;
+        Powered by <a href="https://dictionaryapi.dev/" target="_blank" rel="noopener noreferrer">Free Dictionary API</a>
+      </p>
+    </footer>
 
     <script src="index.js"></script>
-</body>
+  </body>
 </html>
