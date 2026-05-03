@@ -1,9 +1,3 @@
-/**
- * Wordly Dictionary SPA — index.js
- * Fetches definitions from Free Dictionary API and renders them dynamically.
- * https://dictionaryapi.dev/
- */
-
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 const API_BASE = "https://api.dictionaryapi.dev/api/v2/entries/en/";
